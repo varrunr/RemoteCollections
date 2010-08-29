@@ -24,7 +24,7 @@ namespace Collections {
 /**
 A collection that dynamically fetches data from a remote location as needed
 
-	@author
+        @author
 */
 class RemoteCollection : public ServiceCollection
 {
@@ -44,8 +44,6 @@ public:
     virtual bool possiblyContainsTrack( const KUrl &url ) const;
 
 private:
-    /*void parseAlbum( const QString &xml );
-    void parseArtist( const QString &xml );*/
 
     QString m_server;
     QString m_sessionId;

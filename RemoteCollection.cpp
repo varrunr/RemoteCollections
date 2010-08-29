@@ -26,6 +26,7 @@ using namespace Collections;
 RemoteCollection::RemoteCollection( ServiceBase * service )
     : ServiceCollection( service, "RemoteCollection", "RemoteCollection" )
 {
+    DEBUG_BLOCK
 }
 
 RemoteCollection::~RemoteCollection()
@@ -35,25 +36,27 @@ RemoteCollection::~RemoteCollection()
 QueryMaker *
 RemoteCollection::queryMaker()
 {
+    DEBUG_BLOCK
     return new RemoteCollectionQueryMaker( this );
 }
 
 QString
 RemoteCollection::collectionId() const
 {
-    return "Dummy Remote Collection";
+    DEBUG_BLOCK
+    return "Collections of a remote Amarok instance";
 }
 
 QString
 RemoteCollection::prettyName() const
 {
-    return i18n( "Dummy Remote Collection" );
+    DEBUG_BLOCK
+    return i18n( "Remote Collection" );
 }
 
 bool
 RemoteCollection::possiblyContainsTrack(const KUrl & url) const
 {
+    DEBUG_BLOCK
     return false;
 }
-
-

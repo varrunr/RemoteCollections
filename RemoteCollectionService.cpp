@@ -26,13 +26,17 @@
 
 #include <KStandardDirs>
 
-
+#include"HttpService.h"
 #include <QDomDocument>
 
 AMAROK_EXPORT_PLUGIN( RemoteCollectionServiceFactory )
 
 void RemoteCollectionServiceFactory::init()
 {
+    DEBUG_BLOCK
+    //Starting the HTTP service at port 21212
+    HttpService *RemoteService;
+    RemoteService = new HttpService(quint16(21212));
 
     m_initialized = true;
     ServiceBase* service = new RemoteCollectionService( this, "RemoteCollection" );
@@ -44,12 +48,14 @@ void RemoteCollectionServiceFactory::init()
 QString
 RemoteCollectionServiceFactory::name()
 {
+    DEBUG_BLOCK
     return "RemoteCollection";
 }
 
 KPluginInfo
 RemoteCollectionServiceFactory::info()
 {
+    DEBUG_BLOCK
     KPluginInfo pluginInfo( "amarok_service_remotecollection.desktop", "services" );
     pluginInfo.setConfig( config() );
     return pluginInfo;
@@ -58,12 +64,14 @@ RemoteCollectionServiceFactory::info()
 KConfigGroup
 RemoteCollectionServiceFactory::config()
 {
+    DEBUG_BLOCK
     return Amarok::config( "Service_RemoteCollection" );
 }
 
 bool
 RemoteCollectionServiceFactory::possiblyContainsTrack( const KUrl & url ) const
 {
+    DEBUG_BLOCK
     return false;
 }
 
@@ -76,18 +84,18 @@ RemoteCollectionService::RemoteCollectionService( RemoteCollectionServiceFactory
     , m_infoParser( 0 )
     , m_collection( 0 )
 {
+
     DEBUG_BLOCK
-
-
-    setShortDescription( i18n( "Dummy service for testing remote collections." ) );
-    setIcon( KIcon( "view-services-ampache-amarok" ) );
-    setLongDescription( i18n( "Fooooo." ) );
-    setImagePath( KStandardDirs::locate( "data", "amarok/images/hover_info_ampache.png" ) );
+    setShortDescription( i18n( "Service to access remote music collections" ) );
+    setIcon( KIcon( "view-services-remote-amarok" ) );
+    setLongDescription( i18n( "Service to access remote music collections" ) );
+    setImagePath( KStandardDirs::locate( "data", "amarok/images/hover-info-remotecollections.png" ) );
 
 }
 
 RemoteCollectionService::~RemoteCollectionService()
 {
+    DEBUG_BLOCK
     CollectionManager::instance()->removeUnmanagedCollection( m_collection );
     delete m_collection;
 }
@@ -95,11 +103,12 @@ RemoteCollectionService::~RemoteCollectionService()
 void
 RemoteCollectionService::polish()
 {
+    DEBUG_BLOCK
     m_bottomPanel->hide();
     setInfoParser( m_infoParser );
-    
+
     QList<int> levels;
-    levels << CategoryId::Artist << CategoryId::Album;
+    levels << CategoryId::Artist;
     setModel( new SingleCollectionTreeItemModel( new Collections::RemoteCollection( this ), levels ) );
 }
 

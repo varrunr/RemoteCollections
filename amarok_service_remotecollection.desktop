@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KPluginInfo
-Icon=view-services-ampache-amarok
+Icon=view-services-remote-amarok
 Name=Ampache
 
 Comment=Browse remote collections
@@ -11,7 +11,7 @@ ServiceTypes=Amarok/Plugin
 
 X-KDE-Amarok-authors=Nikolaj Hald Nielsen
 X-KDE-Amarok-email=nhnFreespirit@gmail.com
-X-KDE-Amarok-framework-version=60
+X-KDE-Amarok-framework-version=56
 X-KDE-Amarok-name=RemoteCollectionService
 X-KDE-Amarok-plugintype=service
 X-KDE-Amarok-rank=100
@@ -25,4 +25,3 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=false
 X-KDE-Library=amarok_service_remotecollection
 X-KDE-PluginInfo-Name=amarok_service_remotecollection
-

@@ -16,10 +16,16 @@
             RemoteCollectionService.cpp
             RemoteCollection.cpp
             RemoteCollectionQueryMaker.cpp
-			HttpDaemon.cpp
-			HttpService.cpp
+            RemoteCollectionMeta.cpp
+            HttpDaemon.cpp
+            HttpService.cpp
+            QueryHandler.cpp
+            QuerySender.cpp
+            ../../core-impl/collections/support/XmlQueryReader.cpp
+            ../../core-impl/collections/support/XmlQueryWriter.cpp
         )
 
+    add_subdirectory( images )
 
         kde4_add_plugin(amarok_service_remotecollection ${amarok_service_remotecollection_PART_SRCS})
         target_link_libraries(amarok_service_remotecollection

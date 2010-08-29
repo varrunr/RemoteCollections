@@ -1,44 +1,48 @@
+/****************************************************************************************
+ * Copyright (c) 2010 Varrun Ramani <varrunr@gmail.com>                                 *
+ *                                                                                      *
+ * This program is free software; you can redistribute it and/or modify it under        *
+ * the terms of the GNU General Public License as published by the Free Software        *
+ * Foundation; either version 2 of the License, or (at your option) any later           *
+ * version.                                                                             *
+ *                                                                                      *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY      *
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A      *
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.             *
+ *                                                                                      *
+ * You should have received a copy of the GNU General Public License along with         *
+ * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
+ ****************************************************************************************/
 
 #include "HttpService.h"
 #include "core/support/Debug.h"
 
-HttpService::HttpService(quint16 port, QCoreApplication *app)
+HttpService::HttpService(const quint16 port)
+    :m_port(port)
 {
-	setPort(port);
-	setApp(app);
-	start();
+    DEBUG_BLOCK
+    start();
 }
 
-void HttpService::setPort(quint16 port)
-{
-	this->port = port;
-}
-
-void HttpService::setApp(QCoreApplication *app)
-{
-	this->app = app;
-}
-
-void 
+void
 HttpService::start()
 {
-         daemon = new HttpDaemon(port, app);
+    DEBUG_BLOCK
+    m_daemon = new HttpDaemon(m_port);
 
-         if (!daemon->isListening()) {
-             debug() << "Failed" ; //QString("Failed to bind to port %1").arg(daemon->serverPort());
-         }
+     if (!m_daemon->isListening()) {
+         debug() << "Failed to bind to port " << m_port;
+     }
 }
-     
-void 
+
+void
 HttpService::pause()
 {
-         daemon->pause();
+    m_daemon->pause();
 }
 
-void 
+void
 HttpService::resume()
 {
-         daemon->resume();
+    m_daemon->resume();
 }
-
-
